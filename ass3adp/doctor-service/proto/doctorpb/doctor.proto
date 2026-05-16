@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package doctor.v1;
+
+option go_package = "doctor-service/proto/doctorpb;doctorpb";
+
+// DoctorService manages medical doctors in the platform.
+service DoctorService {
+  rpc CreateDoctor(CreateDoctorRequest) returns (DoctorResponse);
+  rpc GetDoctor(GetDoctorRequest) returns (DoctorResponse);
+  rpc ListDoctors(ListDoctorsRequest) returns (ListDoctorsResponse);
+}
+
+message Doctor {
+  string id = 1;
+  string full_name = 2;
+  string specialization = 3;
+  string email = 4;
+}
+
+message CreateDoctorRequest {
+  string full_name = 1;
+  string specialization = 2;
+  string email = 3;
+}
+
+message GetDoctorRequest {
+  string id = 1;
+}
+
+message ListDoctorsRequest {}
+
+message DoctorResponse {
+  Doctor doctor = 1;
+}
+
+message ListDoctorsResponse {
+  repeated Doctor doctors = 1;
+}
